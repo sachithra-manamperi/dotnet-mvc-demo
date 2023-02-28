@@ -11,11 +11,10 @@ variables:
   tag: '$(Build.BuildId)'
   
 stages:
-
 # Build Stage
-- stage: BuildAndTest
+- stage: Build-Image
   jobs:
-  - job: BuildAndTest
+  - job: Build
     pool: myUbuntuAgent
 
     steps:
