@@ -19,46 +19,6 @@ stages:
     pool: myUbuntuAgent
 
     steps:
-
-    - task: UseDotNet@2
-      displayName: 'Use .NET Core sdk'
-      inputs:
-        packageType: sdk
-        version: 7.0.3
-        installationPath: $(Agent.ToolsDirectory)/dotnet        
-  
-    # Restore dependencies
-    - task: DotNetCoreCLI@2
-      displayName: 'dotnet restore'
-      inputs:
-        command: restore
-        projects: '**/*.csproj'
-
-    # Build app
-    - task: DotNetCoreCLI@2
-      displayName: 'dotnet build'
-      inputs:
-        command: build
-        projects: '**/*.csproj'
-        arguments: '--configuration $(buildConfiguration)'
-
-    # Run unit tests
-    - task: DotNetCoreCLI@2
-      displayName: Test
-      inputs:
-        command: test
-        projects: '**/*UnitTests/*.csproj'
-        arguments: '--configuration $(BuildConfiguration)'
-
-    # Publish the app
-    - task: DotNetCoreCLI@2
-      displayName: 'dotnet publish'
-      inputs:
-        command: publish
-        publishWebProjects: True
-        arguments: '--configuration $(BuildConfiguration) --output $(System.DefaultWorkingDirectory)/PublishedWebApp'
-        zipAfterPublish: false
-
     # Build container image
     - task: Docker@2
       displayName: 'Build Docker image'
