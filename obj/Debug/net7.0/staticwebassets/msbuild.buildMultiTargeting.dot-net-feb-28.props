@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\dot-net-feb-28.props" />
+</Project>
