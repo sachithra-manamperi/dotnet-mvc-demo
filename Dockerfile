@@ -1,9 +1,12 @@
-FROM mcr.microsoft.com/dotnet/aspnet:7.0
-
+# Build stage
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /app
-
-# Copy the published web app
 COPY . /app
+RUN dotnet publish -c Release -o out
 
-# Run command
+# Run stage
+FROM mcr.microsoft.com/dotnet/aspnet:7.0-alpine3.14
+WORKDIR /app
+COPY --from=build /app/out .
 ENTRYPOINT ["dotnet", "aspnet-core-dotnet-core.dll"]
+
