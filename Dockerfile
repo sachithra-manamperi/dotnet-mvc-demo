@@ -5,7 +5,7 @@ COPY . /app
 RUN dotnet publish -c Release -o out
 
 # Run stage
-FROM mcr.microsoft.com/dotnet/aspnet:7.0-alpine3.14
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
 WORKDIR /app
 COPY --from=build /app/out .
 ENTRYPOINT ["dotnet", "aspnet-core-dotnet-core.dll"]
