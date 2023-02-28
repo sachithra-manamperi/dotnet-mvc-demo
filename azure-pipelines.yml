@@ -12,7 +12,7 @@ variables:
   
 stages:
 # Build Stage
-- stage: Build-Image
+- stage: BuildImage
   jobs:
   - job: Build
     pool: myUbuntuAgent
